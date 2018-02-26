@@ -42,16 +42,8 @@ public class Transactions {
 		return transactionId;
 	}
 
-	public void setTransactionId(long transactionId) {
-		this.transactionId = transactionId;
-	}
-
 	public long getAccountId() {
 		return accountId;
-	}
-
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
 	}
 
 	public String getTransactionType() {
