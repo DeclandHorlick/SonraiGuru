@@ -1,4 +1,4 @@
-package come.qa.util;
+package com.qa.util;
 
 public class JSONUtil {
 
