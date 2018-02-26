@@ -11,49 +11,49 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.qa.service.repository.AccountInterface;
 import com.qa.service.repository.CustomerInterface;
 
-@Path("/account")
-public class AccountEndpoint {
-	
+@Path("/customer")
+public class CustomerEndpoint {
+
 	@Inject
-	private AccountInterface service;
+	private CustomerInterface service;
 	
 	@GET
-	@Path("/accounts")
+	@Path("/customers")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllAccounts() {
-		return service.getAllAccounts();
+	public String getAllCustomers() {
+		return service.getAllCustomers();
 	}
 	
 	@POST
 	@Path("/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String createAccount(String newAccount) {
-		return service.createAccount(newAccount);
+	public String createCustomer(String customer) {
+		return service.createCustomer(customer);
 	}
 	
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String findAccount(@PathParam("id") Long accountId) {
-		return service.findAccount(accountId);
+	public String findCustomer(@PathParam("id") Long customerId) {
+		return service.findCustomer(customerId);
 	}
 	
 	@PUT
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateAccount(@PathParam("id") Long accountId, String account) {
-		return service.updateAccount(accountId, account);
+	public String updateCustomer(@PathParam("id") Long customerId, String customer) {
+		return service.updateCustomer(customerId, customer);
 	}
 	
 	@DELETE
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String deleteAccount(@PathParam("id") Long accountId) {
-		return service.deleteAccount(accountId);
+	public String deleteAccount(@PathParam("id") Long customerId) {
+		return service.deleteCustomer(customerId);
 	}
+	
 }

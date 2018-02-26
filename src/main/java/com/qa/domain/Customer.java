@@ -19,18 +19,19 @@ public class Customer {
 	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long customerId;	
+	private Long customerId;	
 	@Size(max = 20)
 	private String firstName;
 	@Size(max = 20)
 	private String lastName;
 	@Size(max = 100)
 	private String email;
-	public long getCustomerId() {
+	
+	public Long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 

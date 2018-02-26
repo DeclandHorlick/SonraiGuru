@@ -12,11 +12,11 @@ import javax.validation.constraints.Size;
 public class Account {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long accountId;
+	private Long accountId;
 	
 	@ManyToOne(targetEntity = Customer.class)
 	@JoinColumn(name = "CUST_ID", referencedColumnName = "customerId")	
-	private long customerId;
+	private Long customerId;
 	
 	@Size(max = 10)
 	private String accountNumber;
@@ -28,7 +28,7 @@ public class Account {
 		
 	}
 	
-	public Account(long custId, String accNo, String accType) {
+	public Account(Long custId, String accNo, String accType) {
 		customerId = custId;
 		accountNumber = accNo;
 		accountType = accType;
@@ -38,7 +38,7 @@ public class Account {
 		return accountId;
 	}
 
-	public void setAccountId(long accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 
@@ -58,7 +58,7 @@ public class Account {
 		this.accountType = accountType;
 	}
 
-	public void setCustomerId(long customerId) {
+	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
 	
