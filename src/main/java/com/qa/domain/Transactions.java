@@ -1,6 +1,6 @@
 package com.qa.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ public class Transactions {
 	
 	public Transactions() {}
 	
-	public Transactions(long accId, String transType, double transAmount, Date date) {
+	public Transactions(Long accId, String transType, double transAmount, Date date) {
 		accountId = accId;
 		transactionType = transType;
 		transactionAmount = transAmount;
@@ -24,11 +24,11 @@ public class Transactions {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long transactionId;
+	private Long transactionId;
 	
 	@ManyToOne(targetEntity = Account.class)
 	@JoinColumn(referencedColumnName = "accountId")
-	private long accountId;
+	private Long accountId;
 	
 	@Size(max = 1)
 	private String transactionType;
@@ -38,11 +38,11 @@ public class Transactions {
 	private Date dateStamp;
 	
 	
-	public long getTransactionId() {
+	public Long getTransactionId() {
 		return transactionId;
 	}
 
-	public long getAccountId() {
+	public Long getAccountId() {
 		return accountId;
 	}
 

@@ -15,7 +15,7 @@ import com.qa.domain.Account;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
-public class AccountDBRepository 
+public class AccountDBRepository implements AccountInterface
 {
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;

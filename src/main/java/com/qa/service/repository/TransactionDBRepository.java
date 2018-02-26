@@ -11,11 +11,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import com.qa.domain.Account;
+import com.qa.domain.Customer;
 import com.qa.domain.Transactions;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
-public class TransactionDBRepository {
+public class TransactionDBRepository implements TransactionInterface {
 	
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
@@ -32,7 +34,7 @@ public class TransactionDBRepository {
 
 	@Transactional(REQUIRED)
 	public String deleteTransaction(Long id) {
-		Transactions transaction = findTransaction(id);
+		Transactions transaction = util.getObjectForJSON(findTransaction(id), Transactions.class);
 		if(transaction != null) {
 			manager.remove(transaction);
 			return "{\"message\": \"Transaction removed\"}";
@@ -41,8 +43,9 @@ public class TransactionDBRepository {
 	}
 
 	
-	public Transactions findTransaction(Long id) {
-		return manager.find(Transactions.class, id);
+	public String findTransaction(Long id) {
+		Transactions findTransaction = manager.find(Transactions.class, id);
+		return util.getJSONForObject(findTransaction);
 	}
 	
 	@Transactional(SUPPORTS)
@@ -58,12 +61,12 @@ public class TransactionDBRepository {
 	public String updateTransaction(Long id, String transactionToUpdate)
 	{
 		Transactions updatedTransaction = util.getObjectForJSON(transactionToUpdate, Transactions.class);
-		Transactions currentTransaction = findTransaction(id);
+		Transactions currentTransaction = util.getObjectForJSON(findTransaction(id), Transactions.class);
 		if (transactionToUpdate != null) 
 		{
 			currentTransaction.setTransactionType(updatedTransaction.getTransactionType());
 			currentTransaction.setTransactionAmount(updatedTransaction.getTransactionAmount());
-			
+			manager.merge(currentTransaction);
 		}
 		return "{\"message\": \"transaction sucessfully updated\"}";
 	}

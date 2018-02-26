@@ -72,8 +72,9 @@ public class CustomerDBRepository implements CustomerInterface {
 		Customer customerInDB = util.getObjectForJSON(findCustomer(id), Customer.class);
 		if (customerInDB != null) {
 			manager.remove(manager.contains(customerInDB) ? customerInDB : manager.merge(customerInDB));
+			return "{\"message\": \"customer sucessfully deleted\"}";
 		}
-		return "{\"message\": \"customer sucessfully deleted\"}";
+		return "{\"message\": \"customer not found\"}";
 	}
 
 }
