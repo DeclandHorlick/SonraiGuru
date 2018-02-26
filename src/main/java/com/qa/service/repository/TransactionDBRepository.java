@@ -24,10 +24,10 @@ public class TransactionDBRepository {
 	private JSONUtil util;
 
 	@Transactional(REQUIRED)
-	public String createTransaction(String account) {
-		Transactions transaction = util.getObjectForJSON(account, Transactions.class);
-		manager.persist(transaction);
-		return "{\"message\": \"Account made\"}";
+	public String createTransaction(String transaction) {
+		Transactions newTransaction = util.getObjectForJSON(transaction, Transactions.class);
+		manager.persist(newTransaction);
+		return "{\"message\": \"Transaction made\"}";
 	}
 
 	@Transactional(REQUIRED)
@@ -35,9 +35,9 @@ public class TransactionDBRepository {
 		Transactions transaction = findTransaction(id);
 		if(transaction != null) {
 			manager.remove(transaction);
-			return "{\"message\": \"Account removed\"}";
+			return "{\"message\": \"Transaction removed\"}";
 		}
-		return "{\"message\": \"Account not found\"}";
+		return "{\"message\": \"Transaction not found\"}";
 	}
 
 	
@@ -46,26 +46,26 @@ public class TransactionDBRepository {
 	}
 	
 	@Transactional(SUPPORTS)
-	public String getAllAccounts() 
+	public String getAllTransactions() 
 	{
 		// TODO Auto-generated method stub
-		Query query = manager.createQuery("select a FROM Account a");
+		Query query = manager.createQuery("select t FROM Transaction t");
 		Collection<Transactions> list =  query.getResultList();
 		return util.getJSONForObject(list);
 	} 
 	
 	@Transactional(REQUIRED)
-	public String updateTransaction(Long accountNumber, String accountToUpdate)
+	public String updateTransaction(Long id, String transactionToUpdate)
 	{
-		Transactions updatedTransaction = util.getObjectForJSON(accountToUpdate, Transactions.class);
-		Transactions currentTransaction = findTransaction(accountNumber);
-		if (accountToUpdate != null) 
+		Transactions updatedTransaction = util.getObjectForJSON(transactionToUpdate, Transactions.class);
+		Transactions currentTransaction = findTransaction(id);
+		if (transactionToUpdate != null) 
 		{
 			currentTransaction.setTransactionType(updatedTransaction.getTransactionType());
 			currentTransaction.setTransactionAmount(updatedTransaction.getTransactionAmount());
 			
 		}
-		return "{\"message\": \"account sucessfully updated\"}";
+		return "{\"message\": \"transaction sucessfully updated\"}";
 	}
 	
 }
