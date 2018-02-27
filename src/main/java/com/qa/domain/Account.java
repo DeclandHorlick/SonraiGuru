@@ -1,12 +1,18 @@
 package com.qa.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+
+import org.apache.log4j.Logger;
 
 @Entity
 public class Account {
@@ -14,9 +20,8 @@ public class Account {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long accountId;
 	
-	@ManyToOne(targetEntity = Customer.class)
-	@JoinColumn(name = "CUST_ID", referencedColumnName = "customerId")	
-	private Long customerId;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Set<Transactions> transactionIds = new HashSet<Transactions>();
 	
 	@Size(max = 10)
 	private String accountNumber;
@@ -28,10 +33,12 @@ public class Account {
 		
 	}
 	
-	public Account(Long custId, String accNo, String accType) {
-		customerId = custId;
+	public Account(String accNo, String accType, Set<Transactions> t) {
+		Logger log = Logger.getLogger(Account.class);
+		log.info("------------" + t);
 		accountNumber = accNo;
 		accountType = accType;
+		transactionIds = t;
 	}
 
 	public long getAccountId() {
@@ -58,8 +65,8 @@ public class Account {
 		this.accountType = accountType;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
-	}
+//	public void setCustomerId(Long customerId) {
+//		this.customerId = customerId;
+//	}
 	
 }
