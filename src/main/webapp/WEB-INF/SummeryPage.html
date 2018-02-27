@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summary Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+</head>
+<body onload="dateGraphWeekly()">
+
+
+<div class="jumbotron">
+    <img src="img/BOI_logo.png" alt="BOI_logo" height="50" width="250">
+    <h1 style="color:#FF8C00;"><center>Summary of Account: SM001</center></h1>
+</div>
+		<div class="container">
+           
+                <canvas id="myChart" width="200" height="150"></canvas>
+           
+        </div>
+
+	<section id="menu" o class="container content-section text-center">
+		<div id="frm">
+			
+			<button class="btn btn-primary" " type="button" id="btnWeekly" onclick="dateGraphWeekly()">Weekly</button>
+			<button class="btn btn-primary"type="button" id="btnWeekly" onclick="dateGraphMonthly()" >Monthly</button>
+			<button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphYearly()">Yearly</button>
+		</div>
+	</section>
+<hr>    
+<div class="container">                                          
+  <div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Graph Type
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" style="color:#FF8C00;" href="#">Line Chart</a>
+      <a class="dropdown-item" style="color:#FF8C00;" href="#">Bar Chart</a>
+      <a class="dropdown-item" style="color:#FF8C00;" href="#">Pie Chart</a>
+    </div>
+  </div>
+</div> 
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">                                          
+  <div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Information Type
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" style="color:#FF8C00;" href="#">Balance</a>
+      <a class="dropdown-item" style="color:#FF8C00;"href="#">Spending</a>
+      <a class="dropdown-item" style="color:#FF8C00;"href="#">Something else</a>
+    </div>
+  </div>
+</div> 
+<br>
+<br>
+<br>
+<br>
+
+
+	<footer>
+        <div class="container text-center">
+		<h2 style="color:#FF8C00;">SonraiGuru</h2>
+			<p class="intro-text">
+                 <br>Prototype</p>
+            <p>Copyright &copy; SonraiGuru</p>
+        </div>
+    </footer>
+
+  <script>
+
+  			
+		function dateGraphWeekly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["1", "2", "3", "4", "5", "6", "7"],
+    			datasets: [{
+    				label: "Customer Balance Last Seven Days",
+            		backgroundColor: 'rgb(223, 105, 26)',
+            		borderColor: 'white',
+            		data: [0, 101, 52, 231, 201, 304, 245],
+        		}]
+    		},
+
+    		// Configuration options go here
+    		options : {
+    			scales: {
+    				yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+    					scaleLabel: {
+                            fontColor: 'white',
+    						display: true,
+    						labelString: 'Balance'
+    					}
+    				}],
+    				xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+    					scaleLabel: {
+                            fontColor: 'white',
+    						display: true,
+    						labelString: 'Days'
+    					}
+    				}]
+    			},
+    			elements: {
+    				line: {
+    					tension: 0, // disables bezier curves
+    				}
+    			}
+    		}
+			});
+   		}
+
+   		function dateGraphMonthly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["1", "2", "3", "4"],
+    			datasets: [{
+    				label: "Customer Balance Last Month",
+                    backgroundColor: 'rgb(223, 105, 26)',
+                    borderColor: 'white',
+            		data: [231, 201, 304, 245],
+        		}]
+    		},
+
+    		// Configuration options go here
+            options : {
+                scales: {
+                    yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Balance'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Days'
+                        }
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0, // disables bezier curves
+                    }
+                }
+            }
+            });
+        }
+
+  		function dateGraphYearly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"],
+    			datasets: [{
+    				label: "Customer Balance Last Past Year",
+            		backgroundColor: 'rgb(223, 105, 26)',
+                    borderColor: 'white',
+            		data: [0, 101, 52, 231, 201, 304, 245,101, 52, 231, 201, 304],
+        		}]
+    		},
+
+    		// Configuration options go here
+            options : {
+                scales: {
+                    yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Balance'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Days'
+                        }
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0, // disables bezier curves
+                    }
+                }
+            }
+            });
+        }
+	</script> 	
+</body>
+</html>
