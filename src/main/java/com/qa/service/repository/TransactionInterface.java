@@ -1,5 +1,7 @@
 package com.qa.service.repository;
 
+import java.util.Date;
+
 public interface TransactionInterface {
 	
 	String createTransaction(String transaction);
@@ -11,4 +13,6 @@ public interface TransactionInterface {
 	String updateTransaction(Long id, String customerToUpdate);
 
 	String deleteTransaction(Long id);
+	
+	String findTransactionsBetweenDates(String fromDate, String toDate);
 }
