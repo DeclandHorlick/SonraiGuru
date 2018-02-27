@@ -91,27 +91,16 @@
 
   <script>
 
-        function transactionsByDate() 
-        {
-            console.log("aaaaaaaaaaaaaaaaa");
-            var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-01-03&toDate=2018-01-10",
-  "method": "GET",
-  "headers": {
-    "content-type": "application/json",
-    "cache-control": "no-cache",
-    "postman-token": "84493ebd-ccce-09fd-a447-799af1130e7c"
-  },
-  "processData": false,
-  "data": "{\n  \"dateStamp\":\"2018-01-12\",\n  \"transactionAmount\":50,\n  \"transactionType\":\"D\",\n  \"accountId_accountId\":1\n}"
-}
+         $(document).ready(function(){
+     
+ $.get({url: "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-02-20&toDate=2018-02-27",function(result){
 
-$.ajax(settings).done(function (response) {
-  console.log(response);
-});            
-        }
+    console.log("get test");
+    console.log(result);
+ }});
+
+
+ }); 
 
 
   			function dateGraphWeekly() 
