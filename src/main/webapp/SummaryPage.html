@@ -2,9 +2,10 @@
 <html>
 <head>
   <title>Summary Page</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -47,11 +48,13 @@
 
     <section id="menu" o class="container content-section text-center">
         <div id="frm">
-            <button class="btn btn-primary" "type="button" id="btnWeekly" onclick="dateGraphWeekly()">Weekly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphWeekly()">Weekly</button>
             <button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphMonthly()">Monthly</button>
             <button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphYearly()">Yearly</button>
+            <button class="btn btn-primary" type="button" id="btn" onclick="transactionsByDate()">test</button>
         </div>
         <canvas id="myChart" width="200" height="150"></canvas>
+        <p id="print"></p>
         
     </section>
 </div>
@@ -88,8 +91,19 @@
 
   <script>
 
-  			
-		function dateGraphWeekly() 
+         $(document).ready(function(){
+     
+ $.get({url: "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-02-20&toDate=2018-02-27",function(result){
+
+    console.log("get test");
+    console.log(result);
+ }});
+
+
+ }); 
+
+
+  			function dateGraphWeekly() 
 		{
 			var ctx = document.getElementById('myChart').getContext('2d');
 			var chart = new Chart(ctx, {
