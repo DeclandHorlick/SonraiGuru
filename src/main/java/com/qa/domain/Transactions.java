@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Transactions {
 	
@@ -35,6 +37,7 @@ public class Transactions {
 	
 	private double transactionAmount;
 	
+	@Type(type = "date")
 	private Date dateStamp;
 	
 	
