@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Summary Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+</head>
+<body onload="dateGraphWeekly()">
+
+
+<div class="jumbotron text-center">
+    <img src="img/BOI_logo.png" alt="BOI_logo" height="50" width="250">
+    <h1 style="color:#FF8C00;"><center>Summary of Account: SM001</center></h1>
+</div>
+<div class="container">
+    <!--div class="dropdown col-sm-3">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Information Type
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" style="color:#FF8C00;" href="#">Balance</a>
+            <a class="dropdown-item" style="color:#FF8C00;" href="#">Spending</a>
+            <a class="dropdown-item" style="color:#FF8C00;" href="#">Something else</a>
+        </div>
+    </div-->  
+
+    <div class="dropdown col-sm-3">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+            Graph Type
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" style="color:#FF8C00;" onclick="showLineGraph(),dateGraphWeekly()">Line Chart</a>
+            <a class="dropdown-item" style="color:#FF8C00;" onclick="showBarGraph(),barGraphWeekly()">Bar Chart</a>
+            <!--a class="dropdown-item" style="color:#FF8C00;" onclick="pieChartWeeky()">Pie Chart</a-->
+        </div>
+    </div>
+
+</div> 
+<hr>
+<div id="line-container" class="container">
+
+    <section id="menu" o class="container content-section text-center">
+        <div id="frm">
+            <button class="btn btn-primary" "type="button" id="btnWeekly" onclick="dateGraphWeekly()">Weekly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphMonthly()">Monthly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="dateGraphYearly()">Yearly</button>
+        </div>
+        <canvas id="myChart" width="200" height="150"></canvas>
+        
+    </section>
+</div>
+
+<div id="bar-container" class="container" style="display: none">
+    <section id="menu" o class="container content-section text-center">
+        <div id="frm">
+            <button class="btn btn-primary" " type="button" id="btnWeekly" onclick="barGraphWeekly()">Weekly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="barGraphMonthly()">Monthly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="barGraphYearly()">Yearly</button>
+        </div>
+        <canvas id="myBarChart" width="200" height="150"></canvas>
+    </section>
+</div>
+
+<br>
+<hr>
+
+	<footer>
+        <div class="container text-center">
+		<h2 style="color:#FF8C00;">SonraiGuru</h2>
+			<p class="intro-text">
+                 <br>Prototype</p>
+            <p>Copyright &copy; SonraiGuru</p>
+            <a href="https://github.com/InvictusAmicuse" target="_blank"><i class="fa fa-github"></i> Declan Cordial</a>
+            <a href="https://github.com/ianc890" target="_blank"><i class="fa fa-github"></i> Ian Cunningham</a>
+            <a href="https://github.com/brendanjgreene" target="_blank"><i class="fa fa-github"></i> Brendan Greene</a>
+            <a href="https://github.com/DeclandHorlick" target="_blank"><i class="fa fa-github"></i> Decland Horlick</a>
+            <a href="https://github.com/TonyShannon95" target="_blank"><i class="fa fa-github"></i> Anthony Shannon</a>
+
+
+        </div>
+    </footer>
+
+  <script>
+
+  			
+		function dateGraphWeekly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["1", "2", "3", "4", "5", "6", "7"],
+    			datasets: [{
+    				label: "Customer Balance Last Seven Days",
+            		backgroundColor: 'rgb(223, 105, 26)',
+            		borderColor: 'white',
+            		data: [0, 101, 52, 231, 201, 304, 245],
+        		}]
+    		},
+
+    		// Configuration options go here
+    		options : {
+    			scales: {
+    				yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+    					scaleLabel: {
+                            fontColor: 'white',
+    						display: true,
+    						labelString: 'Balance'
+    					}
+    				}],
+    				xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+    					scaleLabel: {
+                            fontColor: 'white',
+    						display: true,
+    						labelString: 'Days'
+    					}
+    				}]
+    			},
+    			elements: {
+    				line: {
+    					tension: 0, // disables bezier curves
+    				}
+    			}
+    		}
+			});
+   		}
+
+   		function dateGraphMonthly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["1", "2", "3", "4"],
+    			datasets: [{
+    				label: "Customer Balance Last Month",
+                    backgroundColor: 'rgb(223, 105, 26)',
+                    borderColor: 'white',
+            		data: [231, 201, 304, 245],
+        		}]
+    		},
+
+    		// Configuration options go here
+            options : {
+                scales: {
+                    yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Balance'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Weeks'
+                        }
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0, // disables bezier curves
+                    }
+                }
+            }
+            });
+        }
+
+  		function dateGraphYearly() 
+		{
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var chart = new Chart(ctx, {
+			// The type of chart we want to create
+			type: 'line',
+
+    		// The data for our dataset
+    		data: {
+    			labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"],
+    			datasets: [{
+    				label: "Customer Balance Last Past Year",
+            		backgroundColor: 'rgb(223, 105, 26)',
+                    borderColor: 'white',
+            		data: [0, 101, 52, 231, 201, 304, 245,101, 52, 231, 201, 304],
+        		}]
+    		},
+
+    		// Configuration options go here
+            options : {
+                scales: {
+                    yAxes: [{
+
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Balance'
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontColor: "white"
+                        },
+                        scaleLabel: {
+                            fontColor: 'white',
+                            display: true,
+                            labelString: 'Months'
+                        }
+                    }]
+                },
+                elements: {
+                    line: {
+                        tension: 0, // disables bezier curves
+                    }
+                }
+            }
+            });
+        }
+	</script> 
+    <script>
+        var lineChart = document.getElementById('line-container');
+        var barChart = document.getElementById('bar-container');
+        var pieChart = document.getElementById('myPieChart');
+        function showLineGraph(){
+            lineChart.style.display = 'block'
+            barChart.style.display = 'none'
+            //pieChart.style.display = 'none'
+
+        }
+        function showBarGraph(){
+            lineChart.style.display = 'none'
+            barChart.style.display = 'block'
+            //pieChart.style.display = 'none'
+
+        }
+
+    
+
+
+        function barGraphWeekly() 
+        {
+            var ctx = document.getElementById("myBarChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["1", "2", "3", "4", "5", "6", "7"],
+                    datasets: [{
+                        label: 'Weekly Transactions Bar Chart',
+                        data: [12, 19, 3, 5, 2, 3, 7],
+                        backgroundColor: 'rgb(223, 105, 26)',
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                // Configuration options go here
+                options : {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: '# of Transactions'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: 'Days'
+                            }
+                        }]
+                    },
+                }
+            });
+        }
+        function barGraphMonthly() 
+        {
+            var ctx = document.getElementById("myBarChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["1", "2", "3", "4", "5"],
+                    datasets: [{
+                        label: 'Monthly Transactions Bar Chart',
+                        data: [39, 51, 42, 31, 17],
+                        backgroundColor: 'rgb(223, 105, 26)',
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                // Configuration options go here
+                options : {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: '# of Transactions'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: 'Weeks'
+                            }
+                        }]
+                    },
+                }
+            });
+        }
+        function barGraphYearly() 
+        {
+            var ctx = document.getElementById("myBarChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+                    datasets: [{
+                        label: 'Yearly Transactions Bar Chart',
+                        data: [139, 157, 201, 231, 197, 205, 199, 375, 500, 323, 287, 167],
+                        backgroundColor: 'rgb(223, 105, 26)',
+                        borderColor: 'white',
+                        borderWidth: 1
+                    }]
+                },
+                // Configuration options go here
+                options : {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true,
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: '# of Transactions'
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "white"
+                            },
+                            scaleLabel: {
+                                fontColor: 'white',
+                                display: true,
+                                labelString: 'Months'
+                            }
+                        }]
+                    },
+                }
+            });
+        }
+</script>	
+</body>
+</html>

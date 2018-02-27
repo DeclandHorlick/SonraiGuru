@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
@@ -17,20 +15,15 @@ public class Transactions {
 	
 	public Transactions() {}
 	
-	public Transactions(Long accId, String transType, double transAmount, Date date) {
-		accountId = accId;
+	public Transactions(String transType, double transAmount, Date date) {
 		transactionType = transType;
 		transactionAmount = transAmount;
 		dateStamp = date;
 	}
 	
-	@Id 
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long transactionId;
-	
-	@ManyToOne(targetEntity = Account.class)
-	@JoinColumn(referencedColumnName = "accountId")
-	private Long accountId;
 	
 	@Size(max = 1)
 	private String transactionType;
@@ -43,10 +36,6 @@ public class Transactions {
 	
 	public Long getTransactionId() {
 		return transactionId;
-	}
-
-	public Long getAccountId() {
-		return accountId;
 	}
 
 	public String getTransactionType() {
@@ -71,6 +60,11 @@ public class Transactions {
 
 	public void setDateStamp(Date dateStamp) {
 		this.dateStamp = dateStamp;
+	}
+	
+	public String toString()
+	{
+		return transactionAmount + " " + dateStamp;
 	}
 
 }
