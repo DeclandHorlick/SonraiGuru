@@ -10,6 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+  <script src="main.js"></script>
 </head>
 <body onload="dateGraphWeekly()">
 
@@ -53,11 +54,6 @@
             <button class="btn btn-primary" type="button" id="btn" onclick="transactionsByDate()">test</button>
         </div>
         <canvas id="myChart" width="200" height="150"></canvas>
-        <p >Here</p>
-        <div>
-        		<input type="text" id="response"/>
-        </div>
-        
     </section>
 </div>
 
@@ -92,39 +88,7 @@
     </footer>
 
   <script>
-
-         $(document).ready(function(){
-
-     get_transaction();
-      function get_transaction(){
-      	var getDayArray;
- 	$.get({url: "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-02-20&toDate=2018-02-27",function(result){
-
-	  //Show HTML
-	 //  $('#output').html(data);
-	  //Show HTML code
-	  //$("#print").text("Hello");
-
-		var obj = JSON.parse(result);
-		getDayArray = obj.result[1].transactionAmount;
-	 	//getDayArray = result;//[0].transactionAmount;
-	 	//document.getElementById("print").innerHTML = getDayArray;
-	 	//console.log(getDayArray);
-	    //console.log("get test");
-	    //console.log(getDayArray);
-	    console.log(getDayArray);  
-	 }});
-	console.log(getDayArray);
-}
-//var jsonStr = JSON.stringify(myJSONObj)var myJSONObj = 
-//console.log(getDayArray);
-//console.log("get test");
-//console.log("get test");
-
-
- }); 
-
-
+  	
   			function dateGraphWeekly() 
 		{
 			var ctx = document.getElementById('myChart').getContext('2d');
