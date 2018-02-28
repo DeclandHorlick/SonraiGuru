@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -33,12 +35,11 @@ public class Account {
 		
 	}
 	
-	public Account(String accNo, String accType, Set<Transactions> t) {
+	public Account(String accNo, String accType) {
 		Logger log = Logger.getLogger(Account.class);
-		log.info("------------" + t);
+		// log.info("------------" + t);
 		accountNumber = accNo;
 		accountType = accType;
-		transactionIds = t;
 	}
 
 	public long getAccountId() {

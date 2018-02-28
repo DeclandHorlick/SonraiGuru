@@ -3,9 +3,12 @@ package com.qa.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
@@ -32,7 +35,6 @@ public class Transactions {
 	
 	@Type(type = "date")
 	private Date dateStamp;
-	
 	
 	public Long getTransactionId() {
 		return transactionId;

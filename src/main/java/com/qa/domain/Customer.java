@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
@@ -17,18 +18,18 @@ public class Customer {
 
 	public Customer() {}
 	
-	public Customer(String fName, String lName, String email, Set<Account> accounts) {
+	public Customer(String fName, String lName, String email) {
 		firstName = fName;
 		lastName = lName;
-		this.email = email;
-		accountIds = accounts;
-		
+		this.email = email;		
 	}
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long customerId;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "c_id")
 	private Set<Account> accountIds = new HashSet<Account>();
 	
 	@Size(max = 20)
