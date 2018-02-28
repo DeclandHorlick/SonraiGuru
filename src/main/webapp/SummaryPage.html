@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.6/superhero/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
@@ -54,7 +53,10 @@
             <button class="btn btn-primary" type="button" id="btn" onclick="transactionsByDate()">test</button>
         </div>
         <canvas id="myChart" width="200" height="150"></canvas>
-        <p id="print"></p>
+        <p >Here</p>
+        <div>
+        		<input type="text" id="response"/>
+        </div>
         
     </section>
 </div>
@@ -62,7 +64,7 @@
 <div id="bar-container" class="container" style="display: none">
     <section id="menu" o class="container content-section text-center">
         <div id="frm">
-            <button class="btn btn-primary" " type="button" id="btnWeekly" onclick="barGraphWeekly()">Weekly</button>
+            <button class="btn btn-primary" type="button" id="btnWeekly" onclick="barGraphWeekly()">Weekly</button>
             <button class="btn btn-primary" type="button" id="btnWeekly" onclick="barGraphMonthly()">Monthly</button>
             <button class="btn btn-primary" type="button" id="btnWeekly" onclick="barGraphYearly()">Yearly</button>
         </div>
@@ -92,12 +94,32 @@
   <script>
 
          $(document).ready(function(){
-     
- $.get({url: "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-02-20&toDate=2018-02-27",function(result){
 
-    console.log("get test");
-    console.log(result);
- }});
+     get_transaction();
+      function get_transaction(){
+      	var getDayArray;
+ 	$.get({url: "http://localhost:8080/sonrai-guru/rest/transaction/date?fromDate=2018-02-20&toDate=2018-02-27",function(result){
+
+	  //Show HTML
+	 //  $('#output').html(data);
+	  //Show HTML code
+	  //$("#print").text("Hello");
+
+		var obj = JSON.parse(result);
+		getDayArray = obj.result[1].transactionAmount;
+	 	//getDayArray = result;//[0].transactionAmount;
+	 	//document.getElementById("print").innerHTML = getDayArray;
+	 	//console.log(getDayArray);
+	    //console.log("get test");
+	    //console.log(getDayArray);
+	    console.log(getDayArray);  
+	 }});
+	console.log(getDayArray);
+}
+//var jsonStr = JSON.stringify(myJSONObj)var myJSONObj = 
+//console.log(getDayArray);
+//console.log("get test");
+//console.log("get test");
 
 
  }); 
